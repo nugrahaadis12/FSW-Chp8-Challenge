@@ -1,0 +1,592 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FSW Challange Chapter 8 OpenAPI",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/api/v1/players": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Get All Players",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "adi"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "nugrahaadisantoso@yahoo.com"
+                          },
+                          "password": {
+                            "type": "string",
+                            "example": "adi123"
+                          },
+                          "experience": {
+                            "type": "integer",
+                            "example": 500
+                          },
+                          "lvl": {
+                            "type": "integer",
+                            "example": 8
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2022-10-31T09:05:36.385Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2022-10-31T09:05:36.385Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned error message or string if failed to get all player",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Some error occurred while retrieving players."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          
+        }
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "joko"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "joko@abc.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "joko123"
+                  },
+                  "experience": {
+                    "type": "integer",
+                    "example": 300
+                  },
+                  "lvl": {
+                    "type": "integer",
+                    "example": 8
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create Players",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "adi"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "nugrahaadisantoso@yahoo.com"
+                          },
+                          "password": {
+                            "type": "string",
+                            "example": "adi123"
+                          },
+                          "experience": {
+                            "type": "integer",
+                            "example": 100
+                          },
+                          "lvl": {
+                            "type": "integer",
+                            "example": 8
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2022-10-31T09:05:36.385Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2022-10-31T09:05:36.385Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "if username or email or password is null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "FAILED"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "username or email or password field cannot be empty."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error while creating player",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "FAILED"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Some error occurred while creating the Player."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/players/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "id of players",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get player data of selected id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "adi"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "nugrahaadisantoso@yahoo.com"
+                        },
+                        "password": {
+                          "type": "string",
+                          "example": "adi123"
+                        },
+                        "experience": {
+                          "type": "integer",
+                          "example": 100
+                        },
+                        "lvl": {
+                          "type": "integer",
+                          "example": 8
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2022-10-31T09:05:36.385Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "example": "2022-10-31T09:05:36.385Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "return error message string if player not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "result": {
+                        "type": "string",
+                        "example": "FAILED"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Error retrieving Player with id= 1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "change update time of player with selected id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "adi"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "nugrahaadisantoso@yahoo.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "adi123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "player updated (only change updated time)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player was updated successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "returned if request body empty",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "FAILED"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot update Player with id= 13. Maybe Player was not found or req.body is empty!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "returned if catch error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "FAILED"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error updating Player with id= 13"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "delete player with selected id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "player deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Player was deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "returned if player nor found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "FAILED"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot delete Player with id=${id}. Maybe Player was not found!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "returned if catch error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "FAILED"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Could not delete Player with id= 13"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/players/exp/{id}": {
+      "post": {
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "id of players",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "exp": {
+                    "type": "integer",
+                    "example": 5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "add exp to selected player id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "object",
+                      "example": "Player with id= 1 has more experience."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "return error message string if player not found or exp on body null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "result": {
+                        "type": "string",
+                        "example": "FAILED"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "exp field cannot be empty."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "return error message failed to input exp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "result": {
+                        "type": "string",
+                        "example": "FAILED"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Error updating Player exp with id= 1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}
